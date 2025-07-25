@@ -62,4 +62,39 @@ class AssignmentSolver:
             self.cost_matrix[:, j] -= min_val
         print("Column minimums subtracted.")
 
+    def _find_and_cover_zeros(self):
+
+        # Identify potential assignments, determine lines to be drawn.
+
+        self.marked_zeros = []
+        # To keep track of zeros that are part of an assignment
+        assigned_mask = np.zeros_like(self.cost_matrix, dtype=bool)
+
+        # Assign zeros in rows with only one zero
+        for r in range(self.n_rows):
+            zero_indices = np.where(self.cost_matrix[r, :] == 0)[0]
+            # Filter out zeros in columns that are already part of an assignment
+            unassigned_zeros = [c for c in zero_indices if not assigned_mask[:, c].any()]
+            if len(unassigned_zeros) == 1:
+                c = unassigned_zeros[0]
+                self.marked_zeros.append((r, c))
+                assigned_mask[r, c] = True
+
+        # Assign zeros in columns with only one zero
+        for c in range(self.n_cols):
+            # Skip if column already has an assignment from the row scan
+            if assigned_mask[:, c].any():
+                continue
+            zero_indices = np.where(self.cost_matrix[:, c] == 0)[0]
+            # Filter out zeros in rows that are already part of an assignment
+            unassigned_zeros = [r for r in zero_indices if not assigned_mask[r, :].any()]
+            if len(unassigned_zeros) == 1:
+                r = unassigned_zeros[0]
+                self.marked_zeros.append((r, c))
+                assigned_mask[r, c] = True
+        
+        print(f"Only Found {len(self.marked_zeros)} possible assignments.")
+
+        self._cover_all_zeros()
+
     
