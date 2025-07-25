@@ -50,5 +50,16 @@ class AssignmentSolver:
         
         print(f"Dummy Rows/Columns added, matrix size now {size}x{size}.")
 
-    
+    def _subtract_row_minimums(self):
+        for i in range(self.n_rows):
+            min_val = np.min(self.cost_matrix[i, :])
+            self.cost_matrix[i, :] -= min_val
+        print("Row minimums subtracted.")
 
+    def _subtract_column_minimums(self):
+        for j in range(self.n_cols):
+            min_val = np.min(self.cost_matrix[:, j])
+            self.cost_matrix[:, j] -= min_val
+        print("Column minimums subtracted.")
+
+    
