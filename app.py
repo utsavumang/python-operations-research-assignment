@@ -1,7 +1,7 @@
 import customtkinter as ctk
 import numpy as np
 import random
-from assignment_solver import AssignmentSolver
+from solver import AssignmentSolver
 
 class AssignmentApp(ctk.CTk):
 
