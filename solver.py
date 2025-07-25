@@ -34,5 +34,21 @@ class AssignmentSolver:
         print("Completed.")
         return final_assignments, total_cost
 
+    def _add_dummy_rc(self):
+        n, m = self.cost_matrix.shape
+        if n == m:
+            return
+            
+        size = max(n, m)
+        padded_matrix = np.zeros((size, size), dtype=float)
+        padded_matrix[:n, :m] = self.cost_matrix
+        self.cost_matrix = padded_matrix
+        self.n_rows, self.n_cols = self.cost_matrix.shape
+        
+        self.row_covered = np.zeros(self.n_rows, dtype=bool)
+        self.col_covered = np.zeros(self.n_cols, dtype=bool)
+        
+        print(f"Dummy Rows/Columns added, matrix size now {size}x{size}.")
+
     
 
