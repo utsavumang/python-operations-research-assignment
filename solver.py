@@ -165,4 +165,34 @@ class AssignmentSolver:
         
         print(f"Adjusted matrix with min uncovered value: {min_val}")
 
-    
+    def _find_final_assignments(self):
+        zeros = np.argwhere(self.cost_matrix == 0)
+        
+
+        def find_path(row_idx, current_assignments):
+            if row_idx == self.n_rows:
+                return True
+            
+            # Get all zeros in the current row
+            possible_cols = [c for r, c in zeros if r == row_idx]
+            
+            for col in possible_cols:
+                # Check if this column is already assigned
+                if col not in current_assignments.values():
+                    current_assignments[row_idx] = col
+                    if find_path(row_idx + 1, current_assignments):
+                        return True
+                    del current_assignments[row_idx]
+            return False
+
+        self.assignments = {}
+        find_path(0, self.assignments)
+        print("Final optimal assignments found.")
+
+    def _calculate_total_cost(self):
+        total_cost = 0
+        for r, c in self.assignments.items():
+            # Not considering dummies
+            if r < self.original_matrix.shape[0] and c < self.original_matrix.shape[1]:
+                total_cost += self.original_matrix[r, c]
+        return total_cost
