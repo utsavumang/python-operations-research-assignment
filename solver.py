@@ -97,4 +97,43 @@ class AssignmentSolver:
 
         self._cover_all_zeros()
 
+    def _cover_all_zeros(self):
+        # Line Drawing
+        self.row_covered.fill(False)
+        self.col_covered.fill(False)
+        
+        assigned_rows = {r for r, c in self.marked_zeros}
+        
+        # Mark rows that are not assigned
+        for r in range(self.n_rows):
+            if r not in assigned_rows:
+                self.row_covered[r] = True
+        
+        marked_rows_updated = True
+        marked_cols_updated = True
+        
+        while marked_rows_updated or marked_cols_updated:
+            # Mark columns with zeros in newly marked rows
+            marked_cols_updated = False
+            for r in range(self.n_rows):
+                if self.row_covered[r]:
+                    for c in range(self.n_cols):
+                        if self.cost_matrix[r, c] == 0 and not self.col_covered[c]:
+                            self.col_covered[c] = True
+                            marked_cols_updated = True
+            
+            # Mark rows that have assignments in newly marked columns
+            marked_rows_updated = False
+            for r, c in self.marked_zeros:
+                if self.col_covered[c] and not self.row_covered[r]:
+                    self.row_covered[r] = True
+                    marked_rows_updated = True
+        
+        # Lines to be drawn through UNMARKED rows and MARKED columns.
+        self.row_covered = ~self.row_covered
+        
+        num_lines = np.sum(self.row_covered) + np.sum(self.col_covered)
+        print(f"Drew {num_lines} lines to cover all zeros.")
+
+
     
