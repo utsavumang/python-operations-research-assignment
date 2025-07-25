@@ -136,4 +136,33 @@ class AssignmentSolver:
         print(f"Drew {num_lines} lines to cover all zeros.")
 
 
+    def _is_optimal(self):
+        #The solution is optimal if the number of assignments is equal to the number of rows (or columns).
+
+        num_lines = np.sum(self.row_covered) + np.sum(self.col_covered)
+        return num_lines >= self.n_rows
+
+    def _adjust_matrix(self):
+        #Find the smallest uncovered element
+        
+        uncovered_elements = []
+        for r in range(self.n_rows):
+            for c in range(self.n_cols):
+                if not self.row_covered[r] and not self.col_covered[c]:
+                    uncovered_elements.append(self.cost_matrix[r, c])
+        
+        if not uncovered_elements:
+            return
+
+        min_val = min(uncovered_elements)
+        
+        for r in range(self.n_rows):
+            for c in range(self.n_cols):
+                if not self.row_covered[r] and not self.col_covered[c]:
+                    self.cost_matrix[r, c] -= min_val
+                elif self.row_covered[r] and self.col_covered[c]:
+                    self.cost_matrix[r, c] += min_val
+        
+        print(f"Adjusted matrix with min uncovered value: {min_val}")
+
     
