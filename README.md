@@ -6,7 +6,7 @@ Built using **Python** and **CustomTkinter**, this application features a clean,
 
 ## 🖥️ Download
 You can download the pre-built Windows executable here:
-**⬇️ [Download .exe for Windows](https://github.com/utsavumang/python-operations-research-assignment/releases/download/v1.0.0/app.exe)** _(no installation required)_
+**⬇️ [Download .exe for Windows](https://github.com/utsavumang/python-operations-research-assignment/releases/download/v1.0.0/Assignment.Problem.Solver.exe)** _(no installation required)_
 
 ## Screenshots
 ![alt text](image.png)
