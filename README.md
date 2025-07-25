@@ -38,7 +38,6 @@ Built using **Python** and **CustomTkinter**, this application features a clean,
   Rename "Agent" and "Task" to domain-specific terms (e.g., "Wagons" and "Stations").
 
 ---
-
 Technologies Used
 
     Language: Python
@@ -46,3 +45,10 @@ Technologies Used
     GUI Framework: CustomTkinter
 
     Numerical Operations: NumPy
+
+---
+
+> Developed as part of the **Operational Research** (05 HSMC 03) coursework  
+> **Institution:** NIAMT, Ranchi  
+> **Department:** Electronics and Computer Engineering  
+> **Supervisor:** Dr. Ravinder Pal Singh
