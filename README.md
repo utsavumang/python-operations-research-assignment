@@ -4,6 +4,11 @@ A desktop application for solving the **assignment problem**, a fundamental topi
 
 Built using **Python** and **CustomTkinter**, this application features a clean, modern, and user-friendly interface tailored for students, educators, and professionals tackling optimization problems.
 
+## 🖥️ Download
+You can download the pre-built Windows executable here:
+**⬇️ [Download .exe for Windows](https://github.com/utsavumang/python-operations-research-assignment/releases/download/v1.0.0/app.exe)** _(no installation required)_
+
+## Screenshots
 ![alt text](image.png)
 
 ---
